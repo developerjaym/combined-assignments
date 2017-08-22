@@ -3,6 +3,8 @@ package com.cooksys.ftd.assignments.objects;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Rational implements IRational {
+	int numerator;
+	int denominator;
     /**
      * Constructor for rational values of the type:
      * <p>
@@ -15,7 +17,10 @@ public class Rational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public Rational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(denominator == 0)
+    		throw new IllegalArgumentException();
+    	this.numerator = numerator;
+    	this.denominator = denominator;
     }
 
     /**
@@ -23,7 +28,7 @@ public class Rational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+        return numerator;
     }
 
     /**
@@ -31,7 +36,7 @@ public class Rational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+    	return denominator;
     }
 
     /**
@@ -47,7 +52,9 @@ public class Rational implements IRational {
      */
     @Override
     public Rational construct(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(denominator == 0)
+    		throw new IllegalArgumentException();
+        return new Rational(numerator, denominator);
     }
 
     /**
@@ -58,9 +65,22 @@ public class Rational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new NotImplementedException();
+        if(obj instanceof Rational)
+        {
+        	Rational other = (Rational) obj;
+        	if(other.getNumerator() == this.getNumerator() && other.getDenominator() == this.getDenominator())
+        		return true;
+        }
+        return false;
     }
-
+    private void simplifyNegatives()
+    {
+    	if(denominator < 0)
+        {//simplify the negatives
+        	this.numerator = -1*this.numerator;
+        	this.denominator = -1*this.denominator;
+        }
+    }
     /**
      * If this is positive, the string should be of the form `numerator/denominator`
      * <p>
@@ -70,6 +90,35 @@ public class Rational implements IRational {
      */
     @Override
     public String toString() {
-        throw new NotImplementedException();
+        /*if(this.getNumerator() >= 0 && this.getDenominator() >= 0)
+        	return getNumerator() + "/" + getDenominator();
+        else if(this.getNumerator() <= 0 && this.getDenominator() <= 0)
+        	return -1*this.getNumerator() + "/" + -1*this.getDenominator();
+        else if(this.getDenominator() < 0 && this.getNumerator() >= 0)
+        	return -1*this.getNumerator() + "/" + -1*this.getDenominator();
+        else
+        	return this.getNumerator() + "/" + this.getDenominator();*/
+    	String returnMe = "";
+    	simplifyNegatives();
+    	System.out.println("n: " + this.getNumerator());
+    	System.out.println("d: " + this.getDenominator());
+    	if((this.getNumerator() >= 0 && this.getDenominator() >= 0) || (this.getNumerator() <= 0 && this.getDenominator() >= 0))//both positive or above 0
+    	{
+    		returnMe = getNumerator() + "/" + getDenominator();
+    	}
+        else if(this.getNumerator() < 0 && this.getDenominator() < 0)//num negative, den negative
+        {
+        	returnMe =  -1*this.getNumerator() + "/" + -1*this.getDenominator();
+        }
+        else if(this.getDenominator() < 0 && this.getNumerator() >= 0)//den negative, num positive
+        {
+        	returnMe =  "-" + -1*this.getNumerator() + "/" + -1*this.getDenominator();
+        }
+        else//both negative
+        {
+        	returnMe =  "-" + -1*this.getNumerator() + "/" + -1*this.getDenominator();
+        }
+    	System.out.println("to string: " + returnMe);
+    	return returnMe;
     }
 }

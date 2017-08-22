@@ -1,7 +1,5 @@
 package com.cooksys.ftd.assignments.control;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * FizzBuzz is an old programming exercise.
  * The goal is to iterate over a range of numbers and print a message about each number's divisibility.
@@ -26,7 +24,9 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(b == 0)
+    		throw new IllegalArgumentException();
+    	return a % b == 0;//remainder is 0
     }
 
     /**
@@ -41,7 +41,24 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new NotImplementedException();
+        if(n%3 != 0 && n%5 != 0)
+        {
+        	return null;
+        }
+        if(n%5 == 0 && n%3 == 0)
+        {
+        	return "15: FizzBuzz";
+        }
+        if(n%3 == 0)
+        {
+        	return n+": Fizz";
+        }
+        if(n%5 == 0)
+        {
+        	return n+": Buzz";
+        }
+        return "error";
+        
     }
 
     /**
@@ -55,7 +72,37 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	System.out.println("start: " + start + "  end: " + end);
+    	if(end < start)
+    		throw new IllegalArgumentException();//the given end is less than the given start
+        String[] arr = new String[end - start];//make array
+        int counter = 0;//so the divisibility messages go into the array at the proper index
+        for(int i = start; i < end; i++)//go through the numbers in the given range
+        {
+        	System.out.println("  " + counter);
+        	if(message(i) != null)//if the number is divisible by 5 or 3, it should have a divisibility message
+        	{
+        		arr[counter] = message(i);//put that divisibility message into the array we made
+        		System.out.println("     "+i+": " + message(i));
+        		counter++;//the counter controls which index the divisibility message goes into
+        	}
+        	else
+        	{
+        		System.out.println("    "+i+": " + null);
+        	}
+        	
+        }
+        String[] returnArr = new String[counter];//this array will have all the nulls removed
+        int counter2 = 0;//this counter makes sure everything goes into the proper index
+        for(int i = 0; i < arr.length; i++)
+        {
+        	if(arr[i] != null)
+        	{
+        		returnArr[counter2] = arr[i];//put the non-null divisiblity message into the returnArr
+        		counter2++;//go to the next index
+        	}
+        }
+        return returnArr;
     }
 
     /**
@@ -63,7 +110,7 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
+        System.out.println(message(3));
     }
 
 }
