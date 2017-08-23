@@ -37,15 +37,6 @@ interface IRational {
 	 * @return the negation of this
 	 */
 	default IRational negate() {
-
-		/*if(getNumerator() < 0 && getDenominator() >= 0)
-		{
-			return construct(getNumerator() * -1, getDenominator());
-		}
-		else if(getNumerator() >= 0 && getDenominator() < 0)
-		{
-			return construct(getNumerator(), -1 * getDenominator());
-		}*/
 		return construct(getNumerator() * -1, getDenominator());
 
 	}

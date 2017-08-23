@@ -14,7 +14,7 @@ public class SimplifiedRational implements IRational {
     public static int gcd(int a, int b) throws IllegalArgumentException {
         if(a <= 0 || b < 0)
         	throw new IllegalArgumentException();
-        int smallest = Math.min(a, b);
+        int smallest = Math.min(a, b);//I think these need to be in order
         int biggest = Math.max(a, b);
         if(smallest == 0)//we've found our gcd
         	return biggest;
