@@ -7,6 +7,7 @@ public class WageSlave implements Capitalist {
     public WageSlave(String name, int salary) {
         throw new NotImplementedException();
     }
+     
 
     public WageSlave(String name, int salary, FatCat owner) {
         throw new NotImplementedException();

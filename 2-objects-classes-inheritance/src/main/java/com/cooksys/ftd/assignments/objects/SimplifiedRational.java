@@ -19,7 +19,6 @@ public class SimplifiedRational implements IRational {
         if(smallest == 0)//we've found our gcd
         	return biggest;
         return gcd(smallest, biggest%smallest);//keep looking
-        
     }
 
     /**
@@ -58,6 +57,7 @@ public class SimplifiedRational implements IRational {
     public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
     	if(denominator == 0)
     		throw new IllegalArgumentException();
+    	
     	
     	//set the fields
         this.numerator = numerator;
@@ -115,8 +115,7 @@ public class SimplifiedRational implements IRational {
     public boolean equals(Object obj) {
     	if(obj instanceof SimplifiedRational)
         {
-    		SimplifiedRational other = (SimplifiedRational) obj;
-        	if(other.toString().equals(this.toString()))
+        	if(obj.toString().equals(this.toString()))
         		return true;//they are of the same class and the toStrings are the same. 
         					//The num and den are already simplified and the toString method calls simplifyNegatives() to put the negative sign in the right place
         }
