@@ -142,4 +142,26 @@ interface IRational {
 		
 		return construct( (n1 * d2), (d1 * n2));
 	}
+	
+	/**
+     * Simplifies the numerator and denominator of a rational value, only regarding the negative sign.
+     * <p>
+     * For example:
+     * `simplifyNegatives(1, 10) = [1, 10]`
+     * or:
+     * `simplify(1, -10) = [-1, 10]`
+     *
+     * @param numerator the numerator of the IRational
+     * @param denominator the denominator of the IRational
+     * @return an int[] array holding the changed (simplified) version of the numerator and denominator
+     */
+    default int[] simplifyNegatives(int numerator, int denominator)
+    {
+    	if(denominator < 0)
+        {//simplify the negatives
+    		numerator = -1*numerator;
+    		denominator = -1*denominator;
+        }
+    	return new int[]{numerator, denominator};
+    }
 }

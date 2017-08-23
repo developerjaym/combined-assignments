@@ -72,27 +72,6 @@ public class SimplifiedRational implements IRational {
         
     }
     /**
-     * Simplifies the numerator and denominator of a rational value, only regarding the negative sign.
-     * <p>
-     * For example:
-     * `simplifyNegatives(1, 10) = [1, 10]`
-     * or:
-     * `simplify(1, -10) = [-1, 10]`
-     *
-     * @param numerator the numerator of the IRational
-     * @param denominator the denominator of the IRational
-     * @return an int[] array holding the changed (simplified) version of the numerator and denominator
-     */
-    private int[] simplifyNegatives(int numerator, int denominator)
-    {
-    	if(denominator < 0)//the denominator has a negative sign, which is weird
-        {//simplify the negatives
-    		numerator = -1*numerator;
-    		denominator = -1*denominator;
-        }
-    	return new int[]{numerator, denominator};//the negative signs are now in the right place
-    }
-    /**
      * @return the numerator of this rational number
      */
     @Override
