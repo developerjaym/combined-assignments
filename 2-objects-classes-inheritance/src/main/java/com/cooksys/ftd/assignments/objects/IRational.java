@@ -1,7 +1,5 @@
 package com.cooksys.ftd.assignments.objects;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 interface IRational {
 
 	/**
@@ -64,13 +62,6 @@ interface IRational {
 	default IRational invert() throws IllegalStateException {
 		if(getNumerator() == 0)
 			throw new IllegalStateException();
-		
-		/*boolean negative = getDenominator() < 0 ^ getNumerator() < 0;
-		
-		int multiplier = 1;
-		if(negative)
-			multiplier = -1;
-		return construct(multiplier*getDenominator(), multiplier*getNumerator());*/
 		return construct(getDenominator(), getNumerator());//put the d in the n spot, put the n in the d spot
 	}
 

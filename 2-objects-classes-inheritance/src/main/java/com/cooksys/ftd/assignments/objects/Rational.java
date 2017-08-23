@@ -1,7 +1,5 @@
 package com.cooksys.ftd.assignments.objects;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Rational implements IRational {
 	int numerator;
 	int denominator;
@@ -69,17 +67,30 @@ public class Rational implements IRational {
         {
         	Rational other = (Rational) obj;
         	if(other.getNumerator() == this.getNumerator() && other.getDenominator() == this.getDenominator())
-        		return true;
+        		return true;//they are of the same class and the numerator and denominator are the same
         }
         return false;
     }
-    private void simplifyNegatives()
+    /**
+     * Simplifies the numerator and denominator of a rational value, only regarding the negative sign.
+     * <p>
+     * For example:
+     * `simplifyNegatives(1, 10) = [1, 10]`
+     * or:
+     * `simplify(1, -10) = [-1, 10]`
+     *
+     * @param numerator the numerator of the IRational
+     * @param denominator the denominator of the IRational
+     * @return an int[] array holding the changed (simplified) version of the numerator and denominator
+     */
+    private int[] simplifyNegatives(int numerator, int denominator)
     {
     	if(denominator < 0)
         {//simplify the negatives
-        	this.numerator = -1*this.numerator;
-        	this.denominator = -1*this.denominator;
+    		numerator = -1*numerator;
+    		denominator = -1*denominator;
         }
+    	return new int[]{numerator, denominator};
     }
     /**
      * If this is positive, the string should be of the form `numerator/denominator`
@@ -90,35 +101,7 @@ public class Rational implements IRational {
      */
     @Override
     public String toString() {
-        /*if(this.getNumerator() >= 0 && this.getDenominator() >= 0)
-        	return getNumerator() + "/" + getDenominator();
-        else if(this.getNumerator() <= 0 && this.getDenominator() <= 0)
-        	return -1*this.getNumerator() + "/" + -1*this.getDenominator();
-        else if(this.getDenominator() < 0 && this.getNumerator() >= 0)
-        	return -1*this.getNumerator() + "/" + -1*this.getDenominator();
-        else
-        	return this.getNumerator() + "/" + this.getDenominator();*/
-    	String returnMe = "";
-    	simplifyNegatives();
-    	System.out.println("n: " + this.getNumerator());
-    	System.out.println("d: " + this.getDenominator());
-    	if((this.getNumerator() >= 0 && this.getDenominator() >= 0) || (this.getNumerator() <= 0 && this.getDenominator() >= 0))//both positive or above 0
-    	{
-    		returnMe = getNumerator() + "/" + getDenominator();
-    	}
-        else if(this.getNumerator() < 0 && this.getDenominator() < 0)//num negative, den negative
-        {
-        	returnMe =  -1*this.getNumerator() + "/" + -1*this.getDenominator();
-        }
-        else if(this.getDenominator() < 0 && this.getNumerator() >= 0)//den negative, num positive
-        {
-        	returnMe =  "-" + -1*this.getNumerator() + "/" + -1*this.getDenominator();
-        }
-        else//both negative
-        {
-        	returnMe =  "-" + -1*this.getNumerator() + "/" + -1*this.getDenominator();
-        }
-    	System.out.println("to string: " + returnMe);
-    	return returnMe;
+    	int[] arr = simplifyNegatives(getNumerator(), getDenominator());//put the negative sign in the right place
+    	return arr[0] + "/" + arr[1];
     }
 }
