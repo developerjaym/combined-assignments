@@ -58,7 +58,6 @@ public class SimplifiedRational implements IRational {
     	if(denominator == 0)
     		throw new IllegalArgumentException();
     	
-    	
     	//set the fields
         this.numerator = numerator;
         this.denominator = denominator;
