@@ -56,17 +56,21 @@ public class Server extends Utils {
     	//create a server socket that listens for connections on the configured port
     	while(true)
     	{
-    		try (ServerSocket server = new ServerSocket(config.getLocal().getPort());){
+    		try (ServerSocket server = new ServerSocket(config.getLocal().getPort());)
+    		{
 				Socket client = server.accept();
 				System.out.println("Server just accepted a client");
-				Unmarshaller um = Utils.createJAXBContext().createUnmarshaller();
-				Student student = (Student) um.unmarshal(new File(config.getStudentFilePath()));
-				System.out.println("Server! Student done: " + student.getFirstName());
+				
+				//load a student
+				Student student = loadStudent(config.getStudentFilePath(), Utils.createJAXBContext()); 
+				System.out.println("Server! Student done: " + student.getFirstName());//print the student's name just to be sure
 				
 				
-				//now marshal it back
-				 Utils.createJAXBContext().createMarshaller().marshal(student, client.getOutputStream());
-				 client.getOutputStream().close();
+				//now marshal it back to xml and throw the xml into a stream
+				Utils.createJAXBContext().createMarshaller().marshal(student, client.getOutputStream());//marshal the xml from the student we just made and throw all the xml into the client output stream
+				 
+				//now close everything 
+				client.getOutputStream().close();
 				System.out.println("I believe I just marshalled it back");
 				server.close();
 				client.close();

@@ -25,7 +25,10 @@ public class Client {
         // TODO
     	Config config = Utils.loadConfig("C:/Users/ftd-3/code/combined-assignments/4-socket-io-serialization/config/config.xml", Utils.createJAXBContext());
     	
-    	try(Socket client = new Socket(config.getRemote().getHost(), config.getRemote().getPort());) {
+    	try(Socket client = new Socket(
+    			//"172.17.185.222",
+    			config.getRemote().getHost(),
+    			config.getRemote().getPort());) {
 			
 			System.out.println("Client class just made a client socket");
 			
